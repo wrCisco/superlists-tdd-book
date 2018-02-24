@@ -3,6 +3,7 @@
 
 import unittest
 import time
+import os
 
 from selenium import webdriver
 from selenium.common.exceptions import WebDriverException
@@ -17,6 +18,9 @@ class NewVisitorTest(StaticLiveServerTestCase):
 
     def setUp(self):
         self.browser = webdriver.Firefox()
+        staging_server = os.environ.get('STAGING_SERVER')
+        if staging_server:
+            self.live_server_url = 'http://' + staging_server
 
     def tearDown(self):
         self.browser.quit()
