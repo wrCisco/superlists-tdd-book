@@ -28,7 +28,7 @@ def _get_latest_source():
 def _update_virtualenv():
     if not exists('virtualenv/bin/pip'):
         run(f'python3.6 -m venv virtualenv')
-    run(f'python3.6 -m ./virtualenv/bin/pip install -r requirements.txt')
+    run(f'./virtualenv/bin/python3.6 -m pip install -r requirements.txt')
 
 def _create_or_update_dotenv():
     append('.env', 'DJANGO_DEBUG_FALSE=y')
