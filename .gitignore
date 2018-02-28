@@ -8,3 +8,4 @@ __pycache__
 static/
 virtualenv/
 .env
+lists/tests/old_tests.py
