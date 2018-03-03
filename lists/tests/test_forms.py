@@ -4,7 +4,7 @@
 from django.test import TestCase
 
 from lists.models import Item, List
-from lists.forms import ItemForm, EMPTY_ITEM_ERROR
+from lists.forms import ExistingListItemForm, ItemForm, EMPTY_ITEM_ERROR
 
 
 class ItemFormTest(TestCase):
@@ -29,4 +29,10 @@ class ItemFormTest(TestCase):
         self.assertEqual(new_item, Item.objects.first())
         self.assertEqual(new_item.text, 'do me')
         self.assertEqual(new_item.list, list_)
+
+    def test_form_save(self):
+        list_ = List.objects.create()
+        form = ExistingListItemForm(for_list=list_, data={'text': 'hi'})
+        new_item = form.save()
+        self.assertEqual(new_item, Item.objects.all()[0])
 
