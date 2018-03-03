@@ -87,4 +87,3 @@ class ListModelText(TestCase):
         list_ = List.objects.create()
         self.assertEqual(list_.get_absolute_url(), f'/lists/{list_.id}/')
 
-
