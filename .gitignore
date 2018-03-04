@@ -5,7 +5,7 @@ geckodriver.log
 __pycache__
 *.pyc
 *.swp
-static/
+/static
 virtualenv/
 .env
 lists/tests/old_tests.py
