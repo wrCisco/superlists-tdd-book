@@ -12,7 +12,7 @@ def _get_manage_dot_py(host):
 def reset_database(host, user):
     manage_dot_py = _get_manage_dot_py(host)
     with settings(host_string=f'{user}@{host}'):
-        run(r'{manage_dot_py} flush --noinput')
+        run(f'{manage_dot_py} flush --noinput')
 
 
 def _get_server_env_vars(host):
