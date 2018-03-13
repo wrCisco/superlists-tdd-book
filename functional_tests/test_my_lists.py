@@ -71,7 +71,7 @@ class MyListsTest(FunctionalTest):
         self.wait_for(
             lambda: self.browser.find_element_by_link_text('Click cows')
         )
-        self.browser.find_element_by_link_text('Click cows').cows()
+        self.browser.find_element_by_link_text('Click cows').click()
         self.wait_for(
             lambda: self.assertEqual(self.browser.current_url, second_list_url)
         )

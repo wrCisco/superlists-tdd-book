@@ -1,10 +1,13 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.core.exceptions import ValidationError
 from django.contrib.auth import get_user_model
 
 from lists.models import Item, List
-from lists.forms import ExistingListItemForm, ItemForm
+from lists.forms import ExistingListItemForm, ItemForm, NewListForm
 
 User = get_user_model()
 
@@ -35,16 +38,26 @@ def view_list(request, list_id):
 #     form = ItemForm()
 #     return render(request, 'lists/list.html', {'list': list_, 'form': form, 'error': error})
 
+# def new_list(request):
+#     form = ItemForm(data=request.POST)
+#     if form.is_valid():
+#         list_ = List()
+#         if request.user.is_authenticated:
+#             list_.owner = request.user
+#         list_.save()
+#         form.save(for_list=list_)
+#         return redirect(list_)
+#     else:
+#         return render(request, 'lists/home.html', {'form': form})
+
+
 def new_list(request):
-    form = ItemForm(data=request.POST)
+    form = NewListForm(data=request.POST)
     if form.is_valid():
-        list_ = List()
-        list_.owner = request.user
-        list_.save()
-        form.save(for_list=list_)
+        list_ = form.save(owner=request.user)
         return redirect(list_)
-    else:
-        return render(request, 'lists/home.html', {'form': form})
+    return render(request, 'lists/home.html', {'form': form})
+
 
 def my_lists(request, email):
     owner = User.objects.get(email=email)
