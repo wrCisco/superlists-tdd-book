@@ -9,3 +9,4 @@ __pycache__
 virtualenv/
 .env
 lists/tests/old_tests.py
+functional_tests/screendumps
